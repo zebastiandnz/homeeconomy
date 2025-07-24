@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Home Economy</title>
+</head>
+<body>
+  <h1>Bills for {{ month }}/{{ year }}</h1>
+  <a href="{{ url_for('add') }}">Add Bill</a>
+  <table border="1" cellpadding="5" cellspacing="0">
+    <tr>
+      <th>Name</th>
+      <th>Amount</th>
+      <th>Due Day</th>
+      <th>Paid</th>
+      <th>Action</th>
+    </tr>
+    {% for p in payments %}
+    <tr>
+      <td>{{ p.bill.name }}</td>
+      <td>{{ p.amount }}</td>
+      <td>{{ p.bill.due_day }}</td>
+      <td>{{ 'Yes' if p.paid else 'No' }}</td>
+      <td><a href="{{ url_for('toggle', payment_id=p.id) }}">Toggle</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>
